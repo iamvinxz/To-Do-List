@@ -7,6 +7,7 @@ const TodoListContainer = () => {
 
     const [task, setTask] = useState<string>("")                    //input
     const [taskList, setTaskList] = useState<Task[]>([])            //stores todo list
+    const [isFinished, setIsFinished] = useState<boolean>(false)
     const [autoIncrement, setAutoIncrement] = useState<number>(1)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,7 +22,8 @@ const TodoListContainer = () => {
         
         const newTask: Task = {
             id: autoIncrement,
-            task: task
+            task: task,
+            status: isFinished
         }
 
         setTaskList(prev => [...prev, newTask])
@@ -40,7 +42,7 @@ const TodoListContainer = () => {
                 <button type="submit" className="py-[16px] px-[50px] bg-[#ff5945] text-white text-lg cursor-pointer rounded-4xl" onClick={handleAddTask}>Add</button>
             </section>
             <section>
-                <DisplayTask tasks={taskList}/>
+                <DisplayTask tasks={taskList} setUp={setTaskList}/>
             </section>
         </section>
     </main>

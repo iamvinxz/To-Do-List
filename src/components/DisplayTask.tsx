@@ -3,10 +3,11 @@ import { faCircle } from "@fortawesome/free-regular-svg-icons"
 import type { Task } from '../types'
 
 
-const DisplayTask = ({tasks}: {tasks: Task[]}) => {
+const DisplayTask = ({tasks, setUp}: {tasks: Task[], setUp: React.Dispatch<React.SetStateAction<Task[]>>}) => {
 
-  const handleDelete = () => {
-      const newList = tasks.filter(task => task.id !== task.id)
+  const handleDelete = (id: number) => {
+      const newList = tasks.filter(task => task.id !== id)
+      setUp(newList)
   }
 
   return (
@@ -20,7 +21,7 @@ const DisplayTask = ({tasks}: {tasks: Task[]}) => {
                 {tasks.map((tasks) => 
                     <section className='flex justify-between mr-15' key={tasks.id}>
                         <li className="flex items-center text-lg my-6 px-7"><FontAwesomeIcon icon={faCircle} className="text-2xl text-gray-400 pr-4"/>{tasks.task}</li>
-                        <button className='text-red-500 cursor-pointer' onClick={handleDelete}>Delete</button>
+                        <button className='text-red-500 cursor-pointer' onClick={() =>handleDelete(tasks.id)}>Delete</button>
                     </section>
                 )}
             </ul>
