@@ -5,16 +5,21 @@ import { useEffect } from 'react'
 
 const DisplayTask = ({tasks, setUp}: {tasks: Task[], setUp: React.Dispatch<React.SetStateAction<Task[]>>}) => {
 
-  const handleDelete = (id: number) => {
-      const newList = tasks.filter(task => task.id !== id)
-      setUp(newList)
-  }
-
   useEffect(() => {
     fetch('http://localhost:8000/tasks')
       .then(response => {return response.json()})
-      .then(data => setUp(data))
-  },[]);
+      .then(data => setUp(data))  
+  },[tasks]);
+
+  console.log(tasks)
+
+  const handleDelete = (id: string) => {
+    fetch('http://localhost:8000/tasks/' + id, {
+      method: "DELETE"
+    })
+      // const newList = tasks.filter(task => task.id !== id)
+      // setUp(newList)
+  }
 
   return (
     <section>
@@ -24,7 +29,7 @@ const DisplayTask = ({tasks, setUp}: {tasks: Task[], setUp: React.Dispatch<React
             <p className='text-gray-400 text-xl'>No to-do yet</p>
             </section>}
             <ul>
-                {tasks.map((tasks) => 
+                {tasks.map((tasks, data) => 
                     <section className='flex justify-between mr-15' key={tasks.id}>
                         <li className="flex items-center text-lg my-6 px-7"><FontAwesomeIcon icon={faCircle} className="text-2xl text-gray-400 pr-4"/>{tasks.task}</li>
                         <button className='text-red-500 cursor-pointer' onClick={() => handleDelete(tasks.id)}>Delete</button>

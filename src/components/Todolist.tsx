@@ -8,7 +8,6 @@ const TodoListContainer = () => {
     const [task, setTask] = useState<string>("")                    //input
     const [taskList, setTaskList] = useState<Task[]>([])            //stores todo list
     const [isFinished, setIsFinished] = useState<boolean>(false)
-    const [autoIncrement, setAutoIncrement] = useState<number>(1)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setTask(e.target.value)
@@ -21,7 +20,6 @@ const TodoListContainer = () => {
         }
 
         const newTask: Task = {
-            id: autoIncrement,
             task: task,
             status: isFinished
         }
@@ -33,7 +31,6 @@ const TodoListContainer = () => {
         })
 
         setTaskList(prev => [...prev, newTask])
-        setAutoIncrement(prev => prev + 1)
         setTask("")
     }
 
