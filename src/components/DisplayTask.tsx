@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { faCircle } from "@fortawesome/free-regular-svg-icons"
 import type { Task } from '../types'
 import { useEffect } from 'react'
@@ -32,7 +33,7 @@ const DisplayTask = ({tasks, setUp}: {tasks: Task[], setUp: React.Dispatch<React
                 {tasks.map((tasks, data) => 
                     <section className='flex justify-between mr-15' key={tasks.id}>
                         <li className="flex items-center text-lg my-6 px-7"><FontAwesomeIcon icon={faCircle} className="text-2xl text-gray-400 pr-4"/>{tasks.task}</li>
-                        <button className='text-red-500 cursor-pointer' onClick={() => handleDelete(tasks.id)}>Delete</button>
+                        <button className='text-gray-500 cursor-pointer text-[13px]' onClick={() => handleDelete(tasks.id)}><FontAwesomeIcon icon={faXmark} /></button>
                     </section>
                 )}
             </ul>
