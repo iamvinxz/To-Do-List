@@ -19,12 +19,18 @@ const TodoListContainer = () => {
            toast("Please input first", {autoClose: 2000, type: "warning", position: "top-center"})
            return 
         }
-        
+
         const newTask: Task = {
             id: autoIncrement,
             task: task,
             status: isFinished
         }
+
+        fetch("http://localhost:8000/tasks", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(newTask)
+        })
 
         setTaskList(prev => [...prev, newTask])
         setAutoIncrement(prev => prev + 1)
