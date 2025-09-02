@@ -13,7 +13,7 @@ const DisplayTask = ({tasks, setUp}: {tasks: Task[], setUp: React.Dispatch<React
 
   console.log(tasks)
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: string) => {            //json-server will automatically create an id
     fetch('http://localhost:8000/tasks/' + id, {
       method: "DELETE"
     })
